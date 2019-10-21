@@ -25,16 +25,16 @@
   $followers = array();
   $following = array();
 
-  $result = queryMysql("SELECT * FROM members WHERE username='$view'");
+  $result = queryMysql("SELECT * FROM matches WHERE baseMemberID=(SELECT memberID FROM members WHERE username ='$view')");
   $num    = $result->num_rows;
 
   for ($j = 0 ; $j < $num ; ++$j)
   {
     $row           = $result->fetch_array(MYSQLI_ASSOC);
-    $followers[$j] = $row['match'];
+    $followers[$j] = $row['matchMemberID'];
   }
 
-  $result = queryMysql("SELECT * FROM matches WHERE baseMemberID='$view'");
+  $result = queryMysql("SELECT * FROM matches WHERE matchMemberID=(SELECT memberID FROM members WHERE username='$view')");
   $num    = $result->num_rows;
 
   for ($j = 0 ; $j < $num ; ++$j)
@@ -46,7 +46,7 @@
   //$mutual    = array_intersect($followers, $following);
   $followers = array_diff($followers, $mutual);
   $following = array_diff($following, $mutual);
-  $friends   = FALSE;
+  $matches   = FALSE;
 
   echo "<br>";
   
@@ -57,7 +57,7 @@
       echo "<li><a data-transition='slide'
             href='members.php?view=$friend'>$friend</a>";
     echo "</ul>";
-    $friends = TRUE;
+    $matches = TRUE;
   }*/
 
   if (sizeof($followers))
@@ -67,20 +67,20 @@
       echo "<li><a data-transition='slide'
             href='members.php?view=$friend'>$friend</a>";
     echo "</ul>";
-    $friends = TRUE;
+    $matches = TRUE;
   }
 
   if (sizeof($following))
   {
     echo "<span class='subhead'>$name3 following</span><ul>";
-    foreach($following as $friend)
+    foreach($following as $match)
       echo "<li><a data-transition='slide'
-            href='members.php?view=$friend'>$friend</a>";
+            href='members.php?view=$match'>$match</a>";
     echo "</ul>";
-    $friends = TRUE;
+    $matches = TRUE;
   }
 
-  if (!$friends) echo "<br>You don't have any friends yet.";
+  if (!$matches) echo "<br>You don't have any matches yet.";
 ?>
     </div><br>
   </body>
