@@ -1,0 +1,18 @@
+# MSSE661
+Nanosite Approvd
+
+Approv.d
+
+1.) Create a database named approvd
+    a.) Open mysql in terminal
+    b.) CREATE DATABASE approvd;
+2.) Create user phpuser with password phpuserpw
+    a.) In mysql in terminal
+    b.) Run CREATE USER 'phpuser'@'localhost' IDENTIFIED BY 'phpuserpw';
+3.) Grant all permissions to user phpuser
+    a.) In mysql in terminal
+    b.) Run GRANT ALL ON approvd.* TO phpuser@localhost;
+4.) Run functions.php
+5.) Run setup.php
+6.) If applicable, run testuser.php
+6.) Nanosite should be available at /localhost/[source folder]/index.php
