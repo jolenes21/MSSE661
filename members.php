@@ -22,7 +22,7 @@ _INIT;*/
     if ($view == $username) $name = "Your";
     else                $name = "$view's";
     
-    echo "<div class='center'<h3>$name Profile</h3></div>";
+    echo "<div class='center'><h2>$name Profile</h2></div>";
     showProfile($view);
     echo "<a data-role='button' data-transition='slide'
           href='messages.php?view=$view'>View $name messages</a>";

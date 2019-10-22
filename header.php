@@ -22,6 +22,7 @@ echo <<<_INIT
     <link href="https://fonts.googleapis.com/css?family=Montserrat:900|Work+Sans:300" rel="stylesheet">
     <link rel='stylesheet' href='styles.css' type='text/css'>
     <script src='javascript.js'></script>
+    <script async src="//jsfiddle.net/vRqcb/11/"></script>
 
 
 _INIT;
@@ -60,21 +61,24 @@ echo <<<_LOGGEDIN
         <body class='h3'>
             <h3>
                 <div class='center'>
-                  <a data-role='button' data-inline='true' data-icon='home'
-                    data-transition="slide" href='members.php?view=$username'>Home</a>
-                  <a data-role='button' data-inline='true' data-icon='user'
-                    data-transition="slide" href='members.php'>Maybes</a>
-                  <a data-role='button' data-inline='true' data-icon='user'
-                    data-transition="slide" href='matches.php'>Matches</a>
-                  <a data-role='button' data-inline='true' data-icon='heart'
-                    data-transition="slide" href='underconstruction.php'>Matchers</a>
-                  <a data-role='button' data-inline='true' data-icon='mail'
-                    data-transition="slide" href='messages.php'>Messages</a>
-                  <a data-role='button' data-inline='true' data-icon='edit'
-                    data-transition="slide" href='profile.php'>Edit Profile</a>
-                  <a data-role='button' data-inline='true' data-icon='action'
-                    data-transition="slide" href='logout.php'>Log out</a>
-                </div><br>
+                    <ul id='tabs'>
+                        <li><a id='home' data-inline='true' data-transition='slide' 
+                            href='members.php?view=$username'>Home</a></li>
+                        <li><a id='maybes' data-inline='true' data-transition='slide' 
+                            href='members.php'>Maybes</a></li>
+                        <li><a id='matches' data-inline='true' data-transition='"slide" '
+                            href='matches.php'>Matches</a></li>
+                        <li><a id='matchers' data-inline='true' data-transition='slide' 
+                            href='underconstruction.php'>Matchers</a></li>
+                        <li><a id='matchers' data-inline='true' data-transition='slide'
+                            href='messages.php'>Messages</a></li>
+                        <li><a id='matchers' data-inline='true' data-transition='slide'
+                            href='profile.php'>Edit Profile</a></li>
+                        <li><a id='matchers' data-inline='true' data-transition='slide'
+                            href='logout.php'>Log out</a></li>
+                    </ul>
+                  </div><br>
+                </div>
             </h3>
         </body>
 _LOGGEDIN;
@@ -86,9 +90,9 @@ echo <<<_GUEST
             <h3>
                 <div class='center'>
                   <a data-role='button' data-inline='true' data-icon='plus'
-                    data-transition="slide" href='membertype.php'>Sign Up</a>
+                    data-transition='slide' href='membertype.php'>Sign Up</a>
                   <a data-role='button' data-inline='true' data-icon='check'
-                    data-transition="slide" href='login.php'>Log In</a>
+                    data-transition='slide' href='login.php'>Log In</a>
                 </div>
             </h3>
             <p class='info'>(You must be logged in to use this app)</p>
