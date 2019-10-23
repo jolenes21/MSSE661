@@ -1,43 +1,43 @@
 <?php // profile.php
-  require_once 'header.php';
+require_once 'header.php';
 
-  if (!$loggedin) die("</div></body></html>");
+    if (!$loggedin) die("</div></body></html>");
 
-  echo "<div class='center'><h2>Your Profile</h2></div>";
-  
-  $result = queryMysql("SELECT * FROM profile WHERE profileMemberID=(SELECT memberID FROM members WHERE username = '$username')");
+    echo "<div class='center'><h2>Your Profile</h2></div>";
 
-// Start memberBio
-  if (isset($_POST['memberBio']))
-  {
-    $memberBio = sanitizeString($_POST['memberBio']);
-    $memberBio = preg_replace('/\s\s+/', ' ', $memberBio);
-  
-    if ($result->num_rows)
-         queryMysql("UPDATE profile SET memberBio='$memberBio' where profileMemberID=(SELECT memberID FROM members WHERE username = '$username')");
-    else queryMysql("INSERT INTO profile (profileMemberID, memberBio) VALUES ((SELECT memberID FROM members WHERE username = '$username'), '$memberBio')");
-  }
-  else
-  {
-    if ($result->num_rows)
+    $result = queryMysql("SELECT * FROM profile WHERE profileMemberID=(SELECT memberID FROM members WHERE username = '$username')");
+
+    // Start memberBio
+    if (isset($_POST['memberBio']))
     {
-      $row  = $result->fetch_array(MYSQLI_ASSOC);
-      $memberBio = stripslashes($row['memberBio']);
+        $memberBio = sanitizeString($_POST['memberBio']);
+        $memberBio = preg_replace('/\s\s+/', ' ', $memberBio);
+
+        if ($result->num_rows)
+             queryMysql("UPDATE profile SET memberBio='$memberBio' where profileMemberID=(SELECT memberID FROM members WHERE username = '$username')");
+        else queryMysql("INSERT INTO profile (profileMemberID, memberBio) VALUES ((SELECT memberID FROM members WHERE username = '$username'), '$memberBio')");
     }
-    else $memberBio = "";
-  }
+    else
+    {
+        if ($result->num_rows)
+        {
+            $row  = $result->fetch_array(MYSQLI_ASSOC);
+            $memberBio = stripslashes($row['memberBio']);
+        }
+        else $memberBio = "";
+    }
 
-  $memberBio = stripslashes(preg_replace('/\s\s+/', ' ', $memberBio));
+    $memberBio = stripslashes(preg_replace('/\s\s+/', ' ', $memberBio));
 
-showProfile($username);
-  
-// Start memberPhoto
-  $currentDir = "/var/www/html/NetBeansProjects/NanositeApprovd";
-  $uploadDirectory = "/images/";
+    showProfile($username);
 
-  $errors = []; // Store all foreseen and unforseen errors here
+    // Start memberPhoto
+    $currentDir = "/var/www/html/NetBeansProjects/NanositeApprovd";
+    $uploadDirectory = "/images/";
 
-  $fileExtensions = ['jpeg','jpg','png']; // Get all the file extensions
+    $errors = []; // Store all foreseen and unforseen errors here
+
+    $fileExtensions = ['jpeg','jpg','png']; // Get all the file extensions
 
     $fileName = $_FILES['memberPhoto']['name'];
     $fileSize = $_FILES['memberPhoto']['size'];
@@ -47,14 +47,14 @@ showProfile($username);
     $saveto = "$username".".jpg";
 
     $uploadPath = $currentDir . $uploadDirectory . basename($saveto);  
-    
+
     if (isset($_POST['submit']))
         {        
     if ($result->num_rows)
             queryMysql("UPDATE profile SET memberPhoto='$memberPhoto' where profileMemberID=(SELECT memberID FROM members WHERE username = '$username')");
        else queryMysql("INSERT INTO profile (profileMemberID, memberPhoto) VALUES ((SELECT memberID FROM members WHERE username = '$username'), '$memberPhoto')");    
     }
-    
+
         if (! in_array($fileExtension,$fileExtensions) && !empty($fileName)) {
             $errors[] = "This file extension is not allowed. Please upload a JPEG or PNG file";
         }
@@ -63,23 +63,28 @@ showProfile($username);
             $errors[] = "This file is more than 2MB. Sorry, it has to be less than or equal to 2MB";
         }
 
-        if (empty($errors) && !empty($fileName)) {
+        if (empty($errors) && !empty($fileName)) 
+        {
             $didUpload = move_uploaded_file($fileTmpName, $uploadPath);
 
-            if ($didUpload && !empty($fileName)) {
+            if ($didUpload && !empty($fileName)) 
+            {
                 echo "The file " . basename($fileName) . " has been uploaded <br>";
-            } else {
+            } 
+            else 
+            {
                 echo "An error occurred somewhere. Try again or contact the admin";
             }
-        } else {
-        foreach ($errors as $error ) {
+        } 
+        else 
+        {
+            foreach ($errors as $error ) {
             echo "Errors: " . "<br>" . $error;
         }
     }
 
-
 echo "<br>";
-  
+
 echo <<<_END
         <form method='post' action='profile.php' enctype='multipart/form-data'>
         <div data-role='fieldcontain'>
