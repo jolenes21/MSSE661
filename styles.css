@@ -6,6 +6,7 @@
     --font-color: #f03f35/*#424242*/; /*red*/
     --bg-color: #b7e3e4/*#fff*/; /*light blue*/
     --heading-color: #292922; /*black*/
+    --tab-color: #EEE
 }
 
 [data-theme="dark"] {
@@ -14,6 +15,7 @@
     --font-color: #e1e1ff;
     --bg-color: #161625;
     --heading-color: #818cab;
+    --tab-color: #161625;
 }
 
 body {
@@ -164,7 +166,7 @@ a {cursor:pointer;}
     padding-right: 7px;
     padding-bottom: 8px; 
     display:block; 
-    background: #FFF;
+    background: var(--tab-color);
     border-top-left-radius:3px; 
     border-top-right-radius:3px; 
     text-decoration:none;
@@ -177,7 +179,7 @@ a {cursor:pointer;}
     padding-left: 8px;
     padding-right: 8px;
     color:#666666;
-    background: #EEE;
+    background: #FFF;
     outline:none;
     border-bottom: solid 1px #CCC;
 
