@@ -56,10 +56,6 @@ echo <<<_MAIN
           </div>
         </h1>
       <div data-role='content'>
-      <div id="page-container"></div>
-      <div class='center'>
-          <footer id="footer">Jolene Lozow MSSE 661 2019</footer>
-      </div>
     </body>
 _MAIN;
 
